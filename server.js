@@ -8,9 +8,10 @@ require("dotenv").config();
 
 app.use(
   cors({
-    origin: 'https://game-token-store.vercel.app/',
+    origin: ['https://game-token-store.vercel.app', 'http://localhost:3000'],
   })
 );
+
 app.use(express.static("public"));
 app.use(express.json());
 
