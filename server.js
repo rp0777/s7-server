@@ -8,7 +8,7 @@ require("dotenv").config();
 
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://game-token-store.vercel.app/',
   })
 );
 app.use(express.static("public"));
@@ -34,8 +34,8 @@ app.post("/api/create-checkout-session", async (req, res) => {
     session = await stripe.checkout.sessions.create({
       line_items: [lineItem],
       mode: "payment",
-      success_url: `${process.env.YOUR_DOMAIN}/success?success=true&quantity=${product.qnty}&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.YOUR_DOMAIN}?canceled=true`,
+      success_url: `https://game-token-store.vercel.app/success?success=true&quantity=${product.qnty}&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `https://game-token-store.vercel.app/?canceled=true`,
     });
   } catch (error) {
     return res.status(500).json({ error: "Failed to create checkout session" });
