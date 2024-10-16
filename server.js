@@ -6,11 +6,25 @@ const cors = require("cors");
 const app = express();
 require("dotenv").config();
 
-app.use(
-  cors({
-    origin: ['https://game-token-store.vercel.app', 'https://cryptpay-frontend-phi.vercel.app', 'http://localhost:3000'],
-  })
-);
+// app.use(
+//   cors({
+//     origin: ['https://game-token-store.vercel.app', 'https://cryptpay-frontend-phi.vercel.app', 'http://localhost:3000'],
+//   })
+// );
+
+app.use(cors({
+  origin: "https://cryptpay-frontend-phi.vercel.app",
+  methods: ["GET", "POST"],
+  credentials: false, // Set this if you are using cookies or session-based authentication
+}));
+
+const io = new Server(server, {
+  cors: {
+    origin: "https://cryptpay-frontend-phi.vercel.app", // Correct CORS setup for the frontend
+    methods: ["GET", "POST"],
+    credentials: false,
+  }
+});
 
 app.use(express.static("public"));
 app.use(express.json());
