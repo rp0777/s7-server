@@ -43,7 +43,7 @@ app.post("/api/create-checkout-session", async (req, res) => {
     session = await stripe.checkout.sessions.create({
       line_items: [lineItem],
       mode: "payment",
-      success_url: `https://cryptpay-frontend-phi.vercel.app/success?success=true&quantity=${product.qnty}&session_id={process.env.CHECKOUT_SESSION_ID}`,
+      success_url: `https://cryptpay-frontend-phi.vercel.app/success?success=true&quantity=${product.qnty}&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `https://cryptpay-frontend-phi.vercel.app/?canceled=true`,
     });
   } catch (error) {
