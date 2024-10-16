@@ -8,7 +8,7 @@ require("dotenv").config();
 
 app.use(
   cors({
-    origin: ['https://game-token-store.vercel.app', 'http://localhost:3000'],
+    origin: ['https://game-token-store.vercel.app', 'https://cryptpay-frontend-phi.vercel.app', 'http://localhost:3000'],
   })
 );
 
