@@ -18,18 +18,12 @@ app.use(cors({
   credentials: false, // Set this if you are using cookies or session-based authentication
 }));
 
-const io = new Server(server, {
-  cors: {
-    origin: "https://cryptpay-frontend-phi.vercel.app", // Correct CORS setup for the frontend
-    methods: ["GET", "POST"],
-    credentials: false,
-  }
-});
 
 app.use(express.static("public"));
 app.use(express.json());
 
 app.post("/api/create-checkout-session", async (req, res) => {
+  console.log('req','api request')
   const product = req.body;
   console.log("Product :-", product);
 
@@ -49,8 +43,8 @@ app.post("/api/create-checkout-session", async (req, res) => {
     session = await stripe.checkout.sessions.create({
       line_items: [lineItem],
       mode: "payment",
-      success_url: `https://game-token-store.vercel.app/success?success=true&quantity=${product.qnty}&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `https://game-token-store.vercel.app/?canceled=true`,
+      success_url: `https://cryptpay-frontend-phi.vercel.app/success?success=true&quantity=${product.qnty}&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `https://cryptpay-frontend-phi.vercel.app/?canceled=true`,
     });
   } catch (error) {
     return res.status(500).json({ error: "Failed to create checkout session" });
